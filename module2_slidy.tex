@@ -1,4 +1,8 @@
-\documentclass[]{article}
+\documentclass[ignorenonframetext,]{beamer}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -21,11 +25,10 @@
 \usepackage{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage[margin=1in]{geometry}
-\usepackage{hyperref}
-\hypersetup{unicode=true,
-            pdftitle={Module2\_RMarkdown},
-            pdfauthor={Soorma},
+\newif\ifbibliography
+\hypersetup{
+            pdftitle={Module 2\_ioslides},
+            pdfauthor={Soorma Das},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -70,141 +73,85 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{#1}
 \usepackage{longtable,booktabs}
+\usepackage{caption}
+% These lines are needed to make table captions work with longtable:
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight0.8\textheight\else\Gin@nat@height\fi}
 \makeatother
 % Scale images if necessary, so that they will not overflow the page
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
+
+% Prevent slide breaks in the middle of a paragraph:
+\widowpenalties 1 10000
+\raggedbottom
+
+\AtBeginPart{
+  \let\insertpartnumber\relax
+  \let\partname\relax
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \let\insertsectionnumber\relax
+    \let\sectionname\relax
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \let\insertsubsectionnumber\relax
+  \let\subsectionname\relax
+  \frame{\subsectionpage}
+}
+
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{0}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
 
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\newcommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{Module2\_RMarkdown}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{Soorma}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-      \predate{\centering\large\emph}
-  \postdate{\par}
-    \date{October 13, 2018}
-
+\title{Module 2\_ioslides}
+\author{Soorma Das}
+\date{November 29, 2018}
 
 \begin{document}
-\maketitle
+\frame{\titlepage}
 
-\subsection{R Markdown}\label{r-markdown}
+\begin{frame}{R Markdown}
 
-This is an R Markdown document. Markdown is a simple formatting syntax
-for authoring HTML, PDF, and MS Word documents. For more details on
-using R Markdown see \url{http://rmarkdown.rstudio.com}. Link to
-coursera
-\href{https://www.coursera.org/learn/reproducible-templates-analysis/lecture/61zBa/r-markdown-syntax}{COURSERA}
+This is an R Markdown presentation. Markdown is a simple formatting
+syntax for authoring HTML, PDF, and MS Word documents. For more details
+on using R Markdown see \url{http://rmarkdown.rstudio.com}.
 
-\begin{verbatim}
-mean(seq(1:3))
-\end{verbatim}
+When you click the \textbf{Knit} button a document will be generated
+that includes both content as well as the output of any embedded R code
+chunks within the document.
 
-Here is an example of a non-numbered list:
+\end{frame}
+
+\begin{frame}{Slide with Bullets}
 
 \begin{itemize}
 \tightlist
 \item
-  Breakfast
-
-  \begin{itemize}
-  \tightlist
-  \item
-    food
-
-    \begin{itemize}
-    \tightlist
-    \item
-      eggs
-    \item
-      toast
-    \item
-      bacon
-    \end{itemize}
-  \item
-    drink
-
-    \begin{itemize}
-    \tightlist
-    \item
-      apple juice
-    \end{itemize}
-  \end{itemize}
+  Bullet 1
 \item
-  Lunch
-
-  \begin{itemize}
-  \tightlist
-  \item
-    taco
-  \end{itemize}
+  Bullet 2
 \item
-  Dinner
-
-  \begin{itemize}
-  \tightlist
-  \item
-    baked chicken
-  \item
-    broccoli
-  \item
-    rice
-  \end{itemize}
+  Bullet 3
 \end{itemize}
 
-Here is an example of code in a blockquote:
+\end{frame}
 
-\begin{quote}
-\begin{verbatim}
-2+2
-mean(c(1,2,3,4,5))
-\end{verbatim}
-\end{quote}
-
-When you click the \textbf{Knit} button a document will be generated
-that includes both content as well as the output of any embedded R code
-chunks within the document. You can embed an R code chunk like this:
+\begin{frame}[fragile]{Slide with R Output}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -222,32 +169,30 @@ chunks within the document. You can embed an R code chunk like this:
 ##  Max.   :25.0   Max.   :120.00
 \end{verbatim}
 
-\subsection{Including Plots}\label{including-plots}
+\end{frame}
 
-You can also embed plots, for example:
+\begin{frame}{Slide with Plot}
 
-\includegraphics{Module2_RMD_1_files/figure-latex/pressure-1.pdf}
+\includegraphics{module2_slidy_files/figure-beamer/pressure-1.pdf}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(pressure)}
-\end{Highlighting}
-\end{Shaded}
+\end{frame}
 
-\includegraphics{Module2_RMD_1_files/figure-latex/pressure2-1.pdf} Note
-that the \texttt{echo\ =\ FALSE} parameter was added to the code chunk
-to prevent printing of the R code that generated the plot.
+\begin{frame}{A slide with an inserted image}
 
-\subsection{Insert table}\label{insert-table}
+Here is an image inserted
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(}\KeywordTok{head}\NormalTok{(cars), }\DataTypeTok{caption =} \StringTok{"Cars"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{figure}
+\centering
+\includegraphics{sunstar.png}
+\caption{sunstar}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{A slide with a table}
 
 \begin{longtable}[]{@{}rr@{}}
-\caption{Cars}\tabularnewline
+\caption{Top 6 Rows of Cars Dataset}\tabularnewline
 \toprule
 speed & dist\tabularnewline
 \midrule
@@ -265,46 +210,38 @@ speed & dist\tabularnewline
 \bottomrule
 \end{longtable}
 
-\subsection{Insert equations}\label{insert-equations}
+\end{frame}
 
-\[ Y=\beta_0+ \beta_1x \] \#\# Insert images
+\begin{frame}{A slide with an equation}
 
-Here is an image inserted
+A simple linear regression equation
+
+\[ Y = \beta_0 + \beta_1x \]
+
+\end{frame}
+
+\begin{frame}{A slide with an inserted image}
+
+\end{frame}
+
+\begin{frame}{A slide with 2 columns an image and a bulleted list}
 
 \begin{figure}
 \centering
 \includegraphics{sunstar.png}
-\caption{sunstar}
+\caption{}
 \end{figure}
 
-Here is R logo
-\includegraphics{https://www.r-project.org/logo/Rlogo.svg}
+\begin{itemize}
+\tightlist
+\item
+  Bullet 1
+\item
+  Bullet 2
+\item
+  Bullet 3
+\end{itemize}
 
-\subsection{Insert GIF}\label{insert-gif}
-
-\begin{figure}
-\centering
-\includegraphics{sunstar.gif}
-\caption{Sunstar\_GIF}
-\end{figure}
-
-\subsection{Insert video}\label{insert-video}
-
-\begin{figure}
-\centering
-\includegraphics{sunstar.mp4}
-\caption{Sunstar\_video}
-\end{figure}
-
-\subsection{Insert text with some
-footnotes}\label{insert-text-with-some-footnotes}
-
-Here is a footnote reference \footnote{Here is the footnote.} and
-another \footnote{Here's one with multiple blocks}
-
-Here is an inline footnote \footnote{Inlines notes are easier to write,
-  since you don't have to pick an identifier and move down to type the
-  note.}
-
+\end{frame}
 
 \end{document}
